@@ -1,7 +1,9 @@
 
 feature 'Viewing properties' do
-    scenario 'A user can see properties' do
+    scenario 'A user can navigate to property page' do
       visit('/properties')
-      expect(page).to have_content "2 bedroom flat in Greenwich"
+      expect(page).to have_content("hello")
     end
   end
+
+  

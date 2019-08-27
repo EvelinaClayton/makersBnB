@@ -1,14 +1,27 @@
 require 'sinatra/base'
 
 class PropertyManager < Sinatra::Base
+   
+    enable :sessions
+
     get '/' do
-        "Properties"
+        erb :'index'
     end
 
     get '/properties' do
-        #display properties
-        "2 Bedroom flat in Greenwich"
+        "hello There #{session[:username]}"
+        
+    end
+
+    get '/add' do
+        "Add listing"
+    end
+
+    post '/user' do
+        session[:username] = params[:username]
+        redirect '/properties'
     end
 
     run! if app_file == $0
-end
+
+end   
