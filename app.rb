@@ -1,5 +1,6 @@
 require 'sinatra/base'
 
+
 class PropertyManager < Sinatra::Base
    
     enable :sessions
