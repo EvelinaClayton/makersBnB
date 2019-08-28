@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 
 class PropertyManager < Sinatra::Base
-   
+
     enable :sessions
     get '/' do
         erb :'index'
@@ -24,4 +24,4 @@ class PropertyManager < Sinatra::Base
 
     run! if app_file == $0
 
-end   
+end
