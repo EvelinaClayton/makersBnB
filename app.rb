@@ -9,6 +9,7 @@ class PropertyManager < Sinatra::Base
         erb :'index'
     end
 
+    
     get '/properties' do
         "hello There #{session[:username]}"
     end
