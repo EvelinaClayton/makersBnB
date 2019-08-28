@@ -11,17 +11,16 @@ class PropertyManager < Sinatra::Base
 
     get '/properties' do
         "hello There #{session[:username]}"
-        
-    end
-
-    get '/add' do
-        "Add listing"
     end
 
     post '/user' do
         session[:username] = params[:username]
         redirect '/properties'
     end
+
+    # get '/add' do
+    #     "Add listing"
+    # end
 
     run! if app_file == $0
 
