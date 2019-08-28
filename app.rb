@@ -1,8 +1,8 @@
 require 'sinatra/base'
-
+require_relative './lib/listing'
 
 class PropertyManager < Sinatra::Base
-   
+
     enable :sessions
 
     get '/' do
@@ -19,10 +19,8 @@ class PropertyManager < Sinatra::Base
         redirect '/properties'
     end
 
-    # get '/add' do
-    #     "Add listing"
-    # end
+
 
     run! if app_file == $0
 
-end   
+end
