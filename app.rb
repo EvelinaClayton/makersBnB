@@ -11,6 +11,8 @@ class PropertyManager < Sinatra::Base
 
     get '/properties' do
         @user = session[:username]
+        # list all properties
+        @listing = Listing.all
         erb :"properties"
     end
 
