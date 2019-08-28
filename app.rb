@@ -2,16 +2,16 @@ require 'sinatra/base'
 
 
 class PropertyManager < Sinatra::Base
-   
-    enable :sessions
 
+    enable :sessions
     get '/' do
         erb :'index'
+        
     end
 
-    
     get '/properties' do
-        "hello There #{session[:username]}"
+        @user = session[:username]
+        erb :"properties"
     end
 
     post '/user' do
@@ -19,10 +19,14 @@ class PropertyManager < Sinatra::Base
         redirect '/properties'
     end
 
-    # get '/add' do
-    #     "Add listing"
-    # end
+    get '/properties/list' do
+        erb :"list"
+    end
+
+   post '/properties/list' do
+        redirect '/properties'
+    end
 
     run! if app_file == $0
 
-end   
+end
