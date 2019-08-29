@@ -1,8 +1,8 @@
 <p>Welcome, <%=@user %></p>
 <ul>
   <% @listing.each do |listing| %>
-   <li> 
-   title: <%= listing.title %>, city: <%= listing.city %>
+   <li>
+   title: <%= listing['title'] %>, city: <%= listing['city'] %>
   </li>
   <% end %>
 </ul>
