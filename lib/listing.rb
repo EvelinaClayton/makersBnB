@@ -2,27 +2,29 @@ require_relative 'database_connection'
 require_relative '../database_connection_setup'
 
 class Listing
-   
-  # DEFAULT_PRICE = 35
 
-  attr_reader :id, :title, :city, :user_id, :details, :pricepernight
+  attr_reader :id, :title, :city, :user_id, :details, :pricepernight, :date_from, :date_till
 
-  def initialize(id:, title:, city:, details:, pricepernight:, user_id:)
+  def initialize(id, title, city, details, pricepernight, user_id, date_from, date_till)
     @id = id
     @title = title
     @city = city
     @user_id = user_id
     @details = details
     @pricepernight = pricepernight
+    @date_from = date_from
+    @date_till = date_till
   end
 
-  def self.create(title:, city:, details:, pricepernight:)
-    result = DatabaseConnection.query("INSERT INTO properties (title, city, details, pricepernight) VALUES('#{title}', '#{city}', '#{details}', '#{pricepernight}') RETURNING id, title, city, details, pricepernight, user_id")
-    Listing.new(id: result[0]['id'], title: result[0]['title'], city: result[0]['city'], details: result[0]['details'], pricepernight: result[0]['pricepernight'].to_i, user_id: result[0]['user_id'])
+  def self.create(title, city, details, pricepernight, date_from, date_till)
+    result = DatabaseConnection.query("INSERT INTO properties (title, city, details, pricepernight, date_from, date_till) 
+    VALUES('#{title}', '#{city}', '#{details}', '#{pricepernight}', '#{date_from}' , '#{date_till}') 
+    RETURNING id, title, city, details, pricepernight, user_id, date_from, date_till")
+    Listing.new(result[0]['id'], result[0]['title'],result[0]['city'], result[0]['details'], result[0]['pricepernight'].to_i,result[0]['user_id'], result[0]['date_from'], result[0]['date_till'])
   end
 
-  def self.edit(title:, city:, details:, pricepernight:)
-    DatabaseConnection.query("update properties (title, city, details, pricepernight) values ('#{title}', '#{city}', '#{details}', #{pricepernight}) where id = #{@id}")
+  def self.edit(title, city, details, pricepernight, date_from, date_till)
+    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE title = #{@id}")
   end
 
   def self.all
@@ -34,5 +36,5 @@ class Listing
     DatabaseConnection.query("delete from properties where id = #{id}")
   end
 
-
 end
+
