@@ -13,7 +13,6 @@ class PropertyManager < Sinatra::Base
         @user = session[:username]
         # list all properties
         @listing = Listing.all
-        p @listing
         erb :"properties"
     end
 
@@ -24,6 +23,10 @@ class PropertyManager < Sinatra::Base
 
     get '/properties/list' do
         erb :"list"
+    end
+
+    get '/user/new' do
+        erb :"/users/new"
     end
 
    post '/properties/list' do
