@@ -4,9 +4,9 @@ require_relative './lib/listing'
 class PropertyManager < Sinatra::Base
 
     enable :sessions
-
     get '/' do
         erb :'index'
+
     end
 
 
