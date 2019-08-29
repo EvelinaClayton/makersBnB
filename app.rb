@@ -29,7 +29,12 @@ class PropertyManager < Sinatra::Base
         erb :"/users/new"
     end
 
-   post '/properties/list' do
+    post '/user/signup' do
+        User.create(email: params[:email], password: params[:password])
+        redirect '/properties'
+    end
+
+    post '/properties/list' do
         Listing.create(title: params[:title], city: params[:city])
         redirect '/properties'
     end
