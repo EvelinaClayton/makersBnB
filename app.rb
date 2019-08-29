@@ -14,6 +14,7 @@ class PropertyManager < Sinatra::Base
         @user = session[:username]
         # list all properties
         @listing = Listing.all
+        p @listing
         erb :"properties"
     end
 
@@ -27,6 +28,7 @@ class PropertyManager < Sinatra::Base
     end
 
    post '/properties/list' do
+        Listing.create(title: params[:title], city: params[:city])
         redirect '/properties'
     end
 
