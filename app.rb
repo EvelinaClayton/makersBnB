@@ -11,7 +11,10 @@ class PropertyManager < Sinatra::Base
 
 
     get '/properties' do
-        "hello There #{session[:username]}"
+        @user = session[:username]
+        # list all properties
+        @listing = Listing.all
+        erb :"properties"
     end
 
     post '/user' do
@@ -19,7 +22,13 @@ class PropertyManager < Sinatra::Base
         redirect '/properties'
     end
 
+    get '/properties/list' do
+        erb :"list"
+    end
 
+   post '/properties/list' do
+        redirect '/properties'
+    end
 
     run! if app_file == $0
 

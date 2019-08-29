@@ -1,0 +1,12 @@
+<p>Welcome, <%=@user %></p>
+<ul>
+  <% @listing.each do |listing| %>
+   <li> 
+   title: <%= listing.title %>, city: <%= listing.city %>
+  </li>
+  <% end %>
+</ul>
+
+<form action="/properties/list" method="get">
+<button type="submit">Add Property</button>
+</form>
