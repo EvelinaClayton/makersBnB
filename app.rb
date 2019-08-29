@@ -1,5 +1,5 @@
 require 'sinatra/base'
-
+require_relative './lib/listing'
 
 class PropertyManager < Sinatra::Base
 
@@ -8,6 +8,7 @@ class PropertyManager < Sinatra::Base
         erb :'index'
 
     end
+    
 
     get '/properties' do
         "hello There #{session[:username]}"
@@ -18,9 +19,7 @@ class PropertyManager < Sinatra::Base
         redirect '/properties'
     end
 
-    # get '/add' do
-    #     "Add listing"
-    # end
+
 
     run! if app_file == $0
 
