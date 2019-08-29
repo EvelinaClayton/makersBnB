@@ -5,16 +5,22 @@
 <link href="stylesheet.css" rel="stylesheet"/>
 </head>
 <body>
-<h2>Sign in</h2>
 
-<form action="/user" method="post">
+<div class="container">
+<div class="section">
+    <h2>Already a user?</h2>
+    <form action="/user" method="post">
   <input type="email" name="email" placeholder="email address">
   <input type="password" name="password" placeholder="password">
-  <input type="submit" value="Sign in">
-</form>
+  <input type="submit" value="Sign in" class="button">
+    </form></div>
 
-<form action="/user/new" method="get">
-  <input type="submit" value="Create new account">
-</form>
+<div class="section">
+    <h2>Not registered?</h2>
+    <form action="/user/new" method="get">
+  <input type="submit" value="Sign up" class="button">
+    </form></div>
+</div>
+
 </body>
 </html>

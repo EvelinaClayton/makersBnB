@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative './lib/listing'
+require_relative './lib/user'
 
 class PropertyManager < Sinatra::Base
 
@@ -10,14 +11,15 @@ class PropertyManager < Sinatra::Base
     end
 
     get '/properties' do
-        @user = session[:username]
+        @user = session[:email]
         # list all properties
         @listing = Listing.all
         erb :"properties"
     end
 
     post '/user' do
-        session[:username] = params[:username]
+        session[:email] = params[:email]
+        session[:password] = params[:password]
         redirect '/properties'
     end
 
