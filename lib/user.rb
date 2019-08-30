@@ -20,13 +20,13 @@ class User
 
   def self.create(email, password)
     encrypted_password = BCrypt::Password.create(password)
-    check = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{email}'").to_a.pop
+    check = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{email}'").to_a
     # return unless check.any?
-    if check['email'] == email
-      raise 'this email address is already taken'
-    else
+    if check.empty?
       result = DatabaseConnection.query("INSERT INTO users (email, password) VALUES('#{email}', '#{encrypted_password}') RETURNING id, email")
       User.new(result[0]['email'], result[0]['id'].to_i)
+    else
+      raise 'this email address is already taken'
     end
   end
 
