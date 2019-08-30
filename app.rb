@@ -18,8 +18,7 @@ class PropertyManager < Sinatra::Base
     end
 
     post '/user' do
-        session[:email] = params[:email]
-        session[:password] = params[:password]
+        User.authenticate(params[:email], params[:password])
         redirect '/properties'
     end
 
@@ -32,7 +31,7 @@ class PropertyManager < Sinatra::Base
     end
 
     post '/user/signup' do
-        User.create(email: params[:email], password: params[:password])
+        User.create(params[:email], params[:password])
         redirect '/properties'
     end
 
