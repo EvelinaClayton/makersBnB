@@ -37,7 +37,7 @@ class PropertyManager < Sinatra::Base
     end
 
     post '/properties/list' do
-        Listing.create(title: params[:title], city: params[:city])
+        Listing.create(params[:title], params[:city], params[:details], params[:price], params[:date_from], params[:date_till])
         redirect '/properties'
     end
 

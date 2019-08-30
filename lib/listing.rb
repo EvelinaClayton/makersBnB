@@ -1,32 +1,40 @@
 require_relative 'database_connection'
+require_relative '../database_connection_setup'
 
 class Listing
 
-  attr_reader :id, :title, :city, :user_id
+  attr_reader :id, :title, :city, :user_id, :details, :pricepernight, :date_from, :date_till
 
-  def initialize(id:, title:, city:, user_id:)
+  def initialize(id, title, city, details, pricepernight, user_id, date_from, date_till)
     @id = id
     @title = title
     @city = city
     @user_id = user_id
+    @details = details
+    @pricepernight = pricepernight
+    @date_from = date_from
+    @date_till = date_till
   end
 
-  def self.create(title:, city:)
-    DatabaseConnection.setup('makers_bnb')
-    result = DatabaseConnection.query("INSERT INTO properties (title, city) VALUES('#{title}', '#{city}') RETURNING id, title, city, user_id")
-    Listing.new(id: result[0]['id'], title: result[0]['title'], city: result[0]['city'], user_id: result[0]['user_id'])
+  def self.create(title, city, details, pricepernight, date_from, date_till)
+    result = DatabaseConnection.query("INSERT INTO properties (title, city, details, pricepernight, date_from, date_till) 
+    VALUES('#{title}', '#{city}', '#{details}', '#{pricepernight}', '#{date_from}' , '#{date_till}') 
+    RETURNING id, title, city, details, pricepernight, user_id, date_from, date_till, user_id")
+    Listing.new(result[0]['id'].to_i, result[0]['title'],result[0]['city'], result[0]['details'], result[0]['pricepernight'].to_i,result[0]['user_id'].to_i, result[0]['date_from'], result[0]['date_till'])
   end
 
-  # def self.edit(title:, city:)
-  #   DatabaseConnection.setup('makers_bnb')
-  #   DatabaseConnection.query("insert into properties (title, city) values ('#{title}', '#{city}' where id = #{@id}")
-  # end
+  def self.edit(title, city, details, pricepernight, date_from, date_till)
+    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE id = @id")
+  end
 
   def self.all
-    DatabaseConnection.setup('makers_bnb')
     result = DatabaseConnection.query("select * from properties;")
     result.map { |property| property }
   end
 
+  def self.delete(id)
+    DatabaseConnection.query("delete from properties where id = #{id}")
+  end
 
 end
+

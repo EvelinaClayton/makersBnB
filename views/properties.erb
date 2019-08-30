@@ -1,4 +1,4 @@
-<p>Welcome, <%=@user %></p>
+<p>Welcome, <%= @user %></p>
 <ul>
   <% @listing.each do |listing| %>
    <li>
@@ -8,5 +8,5 @@
 </ul>
 
 <form action="/properties/list" method="get">
-<button type="submit">Add Property</button>
+  <button type="submit">Add Property</button>
 </form>
