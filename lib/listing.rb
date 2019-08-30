@@ -1,5 +1,6 @@
 require_relative 'database_connection'
 require_relative '../database_connection_setup'
+require 'date'
 
 class Listing
 
@@ -34,6 +35,11 @@ class Listing
 
   def self.delete(id)
     DatabaseConnection.query("delete from properties where id = #{id}")
+  end
+
+  def self.dateStamp
+    current_date = DateTime.now
+    current_date.strftime "%d/%m/%Y"
   end
 
 end

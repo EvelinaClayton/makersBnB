@@ -14,6 +14,7 @@ class PropertyManager < Sinatra::Base
         @user = session[:email]
         # list all properties
         @listing = Listing.all
+        @date = Listing.dateStamp
         erb :"properties"
     end
 
@@ -37,7 +38,7 @@ class PropertyManager < Sinatra::Base
     end
 
     post '/properties/list' do
-        Listing.create(params[:title], params[:city], params[:details], params[:price], params[:date_from], params[:date_till])
+        Listing.create(params[:title], params[:city], params[:details], params[:pricepernight], params[:date_from], params[:date_till])
         redirect '/properties'
     end
 
