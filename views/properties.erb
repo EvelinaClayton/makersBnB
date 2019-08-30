@@ -3,6 +3,18 @@
   <% @listing.each do |listing| %>
    <li>
    title: <%= listing['title'] %>, city: <%= listing['city'] %>
+
+  <p>
+   <form action="/action_page.php">
+     Date available from:  <input type="date" name="bday" min="#<%=listing['date_from']%>" max="<%=listing['date_until']">
+     <input type="submit">
+   </form>
+   <form action="/action_page.php">
+     Until: <input type="date" name="bday" min="#{date_from}" max="#{date_until}">
+     <input type="submit">
+   </form>
+   
+   
   </li>
   <% end %>
 </ul>
