@@ -1,1 +1,1 @@
-CREATE TABLE properties(id SERIAL PRIMARY KEY, title  VARCHAR(60), city VARCHAR(60), user_id int, FOREIGN KEY (user_id) REFERENCES users(id));
+CREATE TABLE properties(id SERIAL PRIMARY KEY, title VARCHAR(60), city VARCHAR(60), pricepernight INTEGER, details VARCHAR(240), date_from VARCHAR(10), date_till VARCHAR(10), user_id int, FOREIGN KEY (user_id) REFERENCES users(id));

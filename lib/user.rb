@@ -1,4 +1,5 @@
 require_relative 'database_connection'
+require_relative '../database_connection_setup'
 
 class User
 
@@ -12,15 +13,18 @@ class User
   end
 
   def set_listings
-    connection = DatabaseConnection.setup('makers_bnb')
+    # connection = DatabaseConnection.setup('makers_bnb')
     result = DatabaseConnection.query('select * from properties where user_id = id')
     result.map{ |property| property }
   end
 
   def self.create(email:, password:)
-    DatabaseConnection.setup('makers_bnb')
+    # DatabaseConnection.setup('makers_bnb')
     result = DatabaseConnection.query("INSERT INTO users (email, password) VALUES('#{email}', '#{password}') RETURNING id, email")
     User.new(email: result[0]['email'], id: result[0]['id'])
   end
 
+  def self.authenticate()
+  
+  end  
 end

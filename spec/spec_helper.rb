@@ -12,11 +12,14 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 
-require_relative './setup_test_database.rb'
+
 # Set the environment to "test"
 ENV['ENVIRONMENT'] = 'test'
 
+require_relative './setup_test_database'
+
 RSpec.configure do |config|
+
   config.before(:each) do
     setup_test_database
   end
