@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative './lib/listing'
+require_relative './lib/user'
 
 class PropertyManager < Sinatra::Base
 
@@ -26,7 +27,7 @@ class PropertyManager < Sinatra::Base
     end
 
    post '/properties/list' do
-        Listing.create(params[:title], params[:city], params[:details], params[:]
+        Listing.create(params[:title], params[:city], params[:details], params[:price], params[:date_from], params[:date_till])
         redirect '/properties'
     end
 
