@@ -24,4 +24,7 @@ class User
     User.new(email: result[0]['email'], id: result[0]['id'])
   end
 
+  def self.authenticate()
+  
+  end  
 end

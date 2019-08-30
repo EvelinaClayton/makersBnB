@@ -24,7 +24,7 @@ class Listing
   end
 
   def self.edit(title, city, details, pricepernight, date_from, date_till)
-    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE title = #{@id}")
+    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE details = '#{details}'")
   end
 
   def self.all

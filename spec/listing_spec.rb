@@ -34,7 +34,7 @@ describe Listing do
   end
 
   describe '.edit' do 
-    xit 'can edit a listing' do 
+    it 'can edit a listing' do 
       listing = Listing.create('home','london', 'this is the details', 35, "2019-10-01", "2019-10-28")
       Listing.edit('nothome','london','this is the details',35, "2019-10-01", "2019-10-28")
       expect(Listing.all).to eq([{"id" => "1", "title" => 'nothome', "city" => 'london', "details" => 'this is the details', "pricepernight" => "35", "date_from" => "2019-10-01", "date_till" => "2019-10-28", "user_id" => nil}])
