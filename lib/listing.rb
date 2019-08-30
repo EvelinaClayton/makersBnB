@@ -20,11 +20,11 @@ class Listing
     result = DatabaseConnection.query("INSERT INTO properties (title, city, details, pricepernight, date_from, date_till) 
     VALUES('#{title}', '#{city}', '#{details}', '#{pricepernight}', '#{date_from}' , '#{date_till}') 
     RETURNING id, title, city, details, pricepernight, user_id, date_from, date_till")
-    Listing.new(result[0]['id'], result[0]['title'],result[0]['city'], result[0]['details'], result[0]['pricepernight'].to_i,result[0]['user_id'], result[0]['date_from'], result[0]['date_till'])
+    Listing.new(result[0]['id'].to_i, result[0]['title'],result[0]['city'], result[0]['details'], result[0]['pricepernight'].to_i,result[0]['user_id'], result[0]['date_from'], result[0]['date_till'])
   end
 
   def self.edit(title, city, details, pricepernight, date_from, date_till)
-    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE details = '#{details}'")
+    DatabaseConnection.query("UPDATE properties SET title = '#{title}', city = '#{city}', details = '#{details}', pricepernight = #{pricepernight}, date_from = '#{date_from}', date_till = '#{date_till}' WHERE id = @id")
   end
 
   def self.all

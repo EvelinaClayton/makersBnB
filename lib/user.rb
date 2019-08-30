@@ -1,5 +1,6 @@
 require_relative 'database_connection'
 require_relative '../database_connection_setup'
+require 'listing'
 
 class User
 
@@ -24,7 +25,12 @@ class User
     User.new(email: result[0]['email'], id: result[0]['id'])
   end
 
-  def self.authenticate()
+  def self.authenticate
   
   end  
+
+  def self.addListing(title, city, details, ppn, date_from, date_till)
+    Listing.create(title, city, details, ppn, date_from, date_till)
+  end
+
 end
