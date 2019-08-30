@@ -1,4 +1,6 @@
-'''As a user
+## User stories ##
+```
+As a user
 So that I can rent my property
 I would like to be able to list a property
 
@@ -13,4 +15,4 @@ I would like to see properties in my chosen location
 As a user
 So I can start choosing properties
 I would like to be able to log in to the makersBnB homepage
-'''
+```
