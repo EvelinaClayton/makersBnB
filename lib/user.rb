@@ -1,32 +1,35 @@
 require_relative 'database_connection'
 require_relative '../database_connection_setup'
 require_relative './listing'
+require 'bcrypt'
 
 class User
 
   attr_reader :id, :email
 
   def initialize(email, id)
-    # @name = name
     @email = email
     @id = id
     @listings = set_listings
   end
 
   def set_listings
-    # connection = DatabaseConnection.setup('makers_bnb')
     result = DatabaseConnection.query('select * from properties where user_id = id')
     result.map{ |property| property }
   end
 
   def self.create(email, password)
-    # DatabaseConnection.setup('makers_bnb')
-    result = DatabaseConnection.query("INSERT INTO users (email, password) VALUES('#{email}', '#{password}') RETURNING id, email")
+    encrypted_password = BCrypt::Password.create(password)
+    result = DatabaseConnection.query("INSERT INTO users (email, password) VALUES('#{email}', '#{encrypted_password}') RETURNING id, email")
     User.new(result[0]['email'], result[0]['id'].to_i)
   end
 
-  def self.authenticate
-  
+  def self.authenticate(email, password)
+    result = DatabaseConnection.query("SELECT * FROM users WHERE email = '#{email}'")
+    p result
+    return unless result.any?
+    return unless BCrypt::Password.new(result[0]['password']) == password
+    User.new(result[0]['email'], result[0]['id'])
   end  
 
   def addListing(title, city, details, ppn, date_from, date_till)
