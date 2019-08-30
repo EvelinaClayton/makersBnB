@@ -11,14 +11,15 @@ class PropertyManager < Sinatra::Base
     end
 
     get '/properties' do
-        @user = session[:username]
+        @user = session[:email]
         # list all properties
         @listing = Listing.all
         erb :"properties"
     end
 
     post '/user' do
-        session[:username] = params[:username]
+        session[:email] = params[:email]
+        session[:password] = params[:password]
         redirect '/properties'
     end
 
@@ -26,7 +27,16 @@ class PropertyManager < Sinatra::Base
         erb :"list"
     end
 
-   post '/properties/list' do
+    get '/user/new' do
+        erb :"/users/new"
+    end
+
+    post '/user/signup' do
+        User.create(email: params[:email], password: params[:password])
+        redirect '/properties'
+    end
+
+    post '/properties/list' do
         Listing.create(params[:title], params[:city], params[:details], params[:price], params[:date_from], params[:date_till])
         redirect '/properties'
     end
